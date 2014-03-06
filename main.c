@@ -103,7 +103,7 @@ int main(int argc, char **argv) {
 	if (fd < 0)
 		die("Failed to open %s (%s)\n", dev, strerror(errno));
 
-	rates(fd, 1, B38400);
+	rates(fd, 0, B38400);
 
 	// Build each message
 	for (i = 0; i < cur; i++) {
