@@ -133,6 +133,7 @@ int main(int argc, char **argv) {
 					effect[cur] = 'D';
 				else arg("frame")
 					effect[cur] = 'E';
+				else die("Unknown effect %s\n", optarg);
 
 				#undef arg
 			break;
