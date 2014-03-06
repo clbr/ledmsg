@@ -123,6 +123,7 @@ int main(int argc, char **argv) {
 	// Send the initialization byte
 	i = 0;
 	write(fd, &i, 1);
+	usleep(wait);
 
 	// Send each message as 69-byte packets
 	for (i = 0; i < cur; i++) {
@@ -144,7 +145,10 @@ int main(int argc, char **argv) {
 			packet[68] = sum % 256;
 
 			write(fd, packet, 69);
+
+			usleep(wait);
 		}
+
 		usleep(wait);
 	}
 
