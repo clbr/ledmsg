@@ -45,7 +45,9 @@ static void help(const char name[]) {
 		"	-m msg		Message to pass. Up to 6, in order.\n"
 		"	-s speed	Scrolling speed of the next message. 1-5. Default 5.\n"
 		"	-d device	Use device instead of /dev/ttyUSB0.\n"
-		"	-w wait		Wait this long between packets, default 200ms.\n",
+		"	-w wait		Wait this long between packets, default 200ms.\n"
+		"\n"
+		"Example: %1$s -s2 -m \"Slow\" -s5 -m \"Fast message\"\n\n",
 		name);
 }
 
