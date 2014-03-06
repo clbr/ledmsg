@@ -61,7 +61,6 @@ int main(int argc, char **argv) {
 	const char *dev = strdup("/dev/ttyUSB0");
 
 	u32 i;
-	u8 tmp;
 	for (i = 0; i < MSG_MAX; i++) {
 		memset(msg[i], 0, 256);
 		speed[i] = 5;
@@ -141,28 +140,30 @@ int main(int argc, char **argv) {
 	}
 
 	// Bye message
-	tmp = 2;
-	write(fd, &tmp, 1);
-	tmp = 0x33;
-	write(fd, &tmp, 1);
+	u8 end[3];
+	end[0] = 2;
+	end[1] = 0x33;
 	switch (cur) {
 		case 1:
-			tmp = 1;
+			end[2] = 1;
 		break;
 		case 2:
-			tmp = 3;
+			end[2] = 3;
 		break;
 		case 3:
-			tmp = 7;
+			end[2] = 7;
 		break;
 		case 4:
-			tmp = 15;
+			end[2] = 15;
 		break;
 		case 5:
-			tmp = 0x1f;
+			end[2] = 0x1f;
+		break;
+		case 6:
+			end[2] = 0x3f;
 		break;
 	}
-	write(fd, &tmp, 1);
+	write(fd, end, 3);
 
 	close(fd);
 	free((char *) dev);
