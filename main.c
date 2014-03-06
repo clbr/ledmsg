@@ -136,6 +136,14 @@ int main(int argc, char **argv) {
 		msg[i][2] = 'B';
 	}
 
+	/*
+        HOLD      = 'A'
+        SCROLL    = 'B'
+        SNOW      = 'C'
+        FLASH     = 'D'
+        HOLDFRAME = 'E'
+	*/
+
 	// Send the initialization byte
 	i = 0;
 	write(fd, &i, 1);
