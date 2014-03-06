@@ -145,6 +145,7 @@ int main(int argc, char **argv) {
 
 			write(fd, packet, 69);
 		}
+		usleep(wait);
 	}
 
 	// Bye message
