@@ -44,6 +44,9 @@ static void help(const char name[]) {
 	die("\nUsage: %s -m \"message 1\" -m \"Another\"\n\n"
 		"	-m msg		Message to pass. Up to 6, in order.\n"
 		"	-s speed	Scrolling speed of the next message. 1-5. Default 5.\n"
+		"	-e effect	Effect of the next message. Default scroll.\n"
+		"			Effects: hold, scroll, snow, flash, frame.\n"
+		"\n"
 		"	-d device	Use device instead of /dev/ttyUSB0.\n"
 		"	-w wait		Wait this long between packets, default 200ms.\n"
 		"\n"
@@ -80,7 +83,7 @@ int main(int argc, char **argv) {
 
 	u32 cur = 0;
 	u32 wait = 200000;
-	u8 msg[MSG_MAX][256], speed[MSG_MAX];
+	u8 msg[MSG_MAX][256], speed[MSG_MAX], effect[MSG_MAX];
 	const char *dev = strdup("/dev/ttyUSB0");
 
 	u32 i;
@@ -90,7 +93,7 @@ int main(int argc, char **argv) {
 	}
 
 	while (1) {
-		int c = getopt(argc, argv, "hm:s:w:");
+		int c = getopt(argc, argv, "hm:s:w:e:");
 		if (c == -1) break;
 		u32 len;
 
@@ -117,6 +120,22 @@ int main(int argc, char **argv) {
 			case 'w':
 				wait = atoi(optarg) * 1000;
 			break;
+			case 'e':
+				#define arg(a) if (!strcmp(optarg, a))
+
+				arg("hold")
+					effect[cur] = 'A';
+				else arg("scroll")
+					effect[cur] = 'B';
+				else arg("snow")
+					effect[cur] = 'C';
+				else arg("flash")
+					effect[cur] = 'D';
+				else arg("frame")
+					effect[cur] = 'E';
+
+				#undef arg
+			break;
 			default:
 				help(argv[0]);
 		}
@@ -135,7 +154,7 @@ int main(int argc, char **argv) {
 	for (i = 0; i < cur; i++) {
 		msg[i][0] = speed[i] + '0';
 		msg[i][1] = i + 1 + '0';
-		msg[i][2] = 'B';
+		msg[i][2] = effect[i];
 	}
 
 	/*
