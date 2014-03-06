@@ -42,7 +42,7 @@ static void die(const char msg[], ...) {
 static void help(const char name[]) {
 
 	die("\nUsage: %s -m \"message 1\" -m \"Another\"\n\n"
-		"	-m msg		Message to pass. Up to 5, in order.\n"
+		"	-m msg		Message to pass. Up to 6, in order.\n"
 		"	-s speed	Scrolling speed of the next message. 1-5. Default 5.\n"
 		"	-d device	Use device instead of /dev/ttyUSB0.\n"
 		"	-w wait		Wait this long between packets, default 200ms.\n",
