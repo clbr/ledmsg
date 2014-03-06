@@ -28,7 +28,8 @@ static void help(const char name[]) {
 	die("\nUsage: %s -m \"message 1\" -m \"Another\"\n\n"
 		"	-m msg		Message to pass. Up to 5, in order.\n"
 		"	-s speed	Scrolling speed of the next message. 1-5. Default 5.\n"
-		"	-d device	Use device instead of /dev/ttyUSB0.\n",
+		"	-d device	Use device instead of /dev/ttyUSB0.\n"
+		"	-w wait		Wait this long between packets, default 200ms.\n",
 		name);
 }
 
@@ -45,6 +46,9 @@ static void rates(const int fd, const u8 parity, const u32 speed) {
 		tty.c_cflag |= PARENB;
 	else
 		tty.c_cflag &= ~PARENB;
+
+	if (tcsetattr(fd, TCSANOW, &tty) != 0)
+		die("tcsetattr");
 }
 
 int main(int argc, char **argv) {
@@ -57,6 +61,7 @@ int main(int argc, char **argv) {
 		help(argv[0]);
 
 	u32 cur = 0;
+	u32 wait = 200000;
 	u8 msg[MSG_MAX][256], speed[MSG_MAX];
 	const char *dev = strdup("/dev/ttyUSB0");
 
@@ -67,7 +72,7 @@ int main(int argc, char **argv) {
 	}
 
 	while (1) {
-		int c = getopt(argc, argv, "hm:s:");
+		int c = getopt(argc, argv, "hm:s:w:");
 		if (c == -1) break;
 		u32 len;
 
@@ -90,6 +95,9 @@ int main(int argc, char **argv) {
 			case 'd':
 				free((char *) dev);
 				dev = strdup(optarg);
+			break;
+			case 'w':
+				wait = atoi(optarg) * 1000;
 			break;
 			default:
 				help(argv[0]);
