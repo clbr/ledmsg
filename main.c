@@ -3,6 +3,7 @@
 #include "lrtypes.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <unistd.h>
 
 static void help(const char name[]) {
@@ -25,7 +26,12 @@ int main(int argc, char **argv) {
 		help(argv[0]);
 
 	u32 curmsg = 0;
-	u8 msg[MSG_MAX], speed[MSG_MAX];
+	u8 msg[MSG_MAX][256], speed[MSG_MAX];
+
+	u32 i;
+	for (i = 0; i < MSG_MAX; i++) {
+		memset(msg[i], 0, 256);
+	}
 
 	while (1) {
 		int c = getopt(argc, argv, "hm:s:");
