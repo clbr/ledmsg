@@ -131,7 +131,7 @@ int main(int argc, char **argv) {
 			u8 packet[69];
 			packet[0] = 2;
 			packet[1] = 0x31;
-			packet[2] = 6;
+			packet[2] = 6 + i;
 			packet[3] = j * 64;
 			memcpy(packet + 4, msg[i] + j*64, 64);
 
