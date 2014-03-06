@@ -50,7 +50,7 @@ static void rates(const int fd, const u8 parity, const u32 speed) {
 int main(int argc, char **argv) {
 
 	enum {
-		MSG_MAX = 5
+		MSG_MAX = 6
 	};
 
 	if (argc < 2)
