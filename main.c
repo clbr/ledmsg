@@ -50,7 +50,7 @@ static void help(const char name[]) {
 		"	-d device	Use device instead of /dev/ttyUSB0.\n"
 		"	-w wait		Wait this long between packets, default 200ms.\n"
 		"\n"
-		"Example: %1$s -s2 -m \"Slow\" -s5 -m \"Fast message\"\n\n",
+		"Example: %1$s -s2 -esnow -m \"Slow snow\" -s5 -m \"Fast scroll\"\n\n",
 		name);
 }
 
