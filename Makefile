@@ -7,7 +7,7 @@ NAME = ledmsg
 SRC = $(wildcard *.c)
 OBJ = $(SRC:.c=.o)
 
-.PHONY: all clean
+.PHONY: all clean install
 
 all: $(NAME)
 
@@ -17,5 +17,5 @@ $(NAME): $(OBJ)
 clean:
 	rm -f *.o $(NAME)
 
-install:
+install: all
 	install -D -m 755 $(NAME) $(DESTDIR)$(PREFIX)/bin
