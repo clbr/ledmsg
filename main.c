@@ -80,6 +80,8 @@ int main(int argc, char **argv) {
 				memcpy(msg[cur] + 4, optarg, len);
 				msg[cur][3] = len;
 				cur++;
+				if (cur > MSG_MAX)
+					die("Too many messages\n");
 			break;
 			case 's':
 				speed[cur] = atoi(optarg);
