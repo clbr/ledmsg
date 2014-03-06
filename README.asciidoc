@@ -1,0 +1,11 @@
+ledmsg
+======
+
+Linux program for writing text messages into *B1236*, *B1248*, and compatible
+led matrix screens.
+
+This is a port of ajesler/ledbadge-rb to C, because I didn't want to install
+Ruby or Perl on my embedded boxes.
+
+Fancy features such as images, snow, pictograms are not supported. Text only,
+speeds only.
