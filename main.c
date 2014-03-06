@@ -90,6 +90,7 @@ int main(int argc, char **argv) {
 	for (i = 0; i < MSG_MAX; i++) {
 		memset(msg[i], 0, 256);
 		speed[i] = 5;
+		effect[i] = 'B';
 	}
 
 	while (1) {
